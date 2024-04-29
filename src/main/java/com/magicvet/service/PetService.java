@@ -11,7 +11,7 @@ public class PetService {
 
     public boolean addPet() {
         petConfirmation = false;
-        System.out.print("Do you want to add a pet? (yes / no):");
+        System.out.print("Do you want to add a pet? (yes / no): ");
         String addingPetConfirmation = Main.SCANNER.nextLine();
 
         if(addingPetConfirmation.equals("yes")) {
