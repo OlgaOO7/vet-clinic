@@ -6,7 +6,7 @@ import main.java.com.magicvet.model.Dog;
 
 public class PetService {
 
-    private static String DOG_TYPE = "dog";
+    private static final String DOG_TYPE = "dog";
     public boolean petConfirmation;
 
     public boolean addPet() {
