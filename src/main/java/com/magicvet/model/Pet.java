@@ -10,6 +10,12 @@ public abstract class Pet {
     private String name;
     private String ownerName;
 
+    public Pet() {};
+
+    public Pet(String age) {
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "Pet { " + "\n\t\ttype = " + type

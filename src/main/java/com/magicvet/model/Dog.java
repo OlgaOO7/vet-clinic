@@ -3,12 +3,32 @@ package main.java.com.magicvet.model;
 import java.util.Objects;
 
 public class Dog extends Pet{
+
+    public static final String XS = "XS";
+    public static final String S = "S";
+    public static final String M = "M";
+    public static final String L = "L";
+    public static final String XL = "XL";
+
+    public static final String age1 = "1";
+    public static final String age2 = "2";
+    public static final String age3 = "1";
+    public static final String age4 = "4";
+    public static final String age5 = "5";
+
     private String size;
 
     public Dog() {
         setType("dog");
     }
 
+    public Dog(String size, String age) {
+        this.size = size;
+    }
+
+    public Dog(String age) {
+        super(age);
+    }
 
     @Override
     public String toString() {
