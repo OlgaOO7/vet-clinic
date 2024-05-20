@@ -16,7 +16,7 @@ public class Client {
                 + "\n\tfirst name = " + firstName
                 + ", last name = " + lastName
                 + ", email = " + email
-                + "\n\t" + pet
+                + "\n\t" + "pet = " + pet
                 + "\n}";
     }
 
