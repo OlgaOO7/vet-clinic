@@ -4,30 +4,25 @@ import java.util.Objects;
 
 public class Dog extends Pet{
 
-    public static final String XS = "XS";
-    public static final String S = "S";
-    public static final String M = "M";
-    public static final String L = "L";
-    public static final String XL = "XL";
+    private Age age;
+    private Size size;
 
-    public static final String age1 = "1";
-    public static final String age2 = "2";
-    public static final String age3 = "1";
-    public static final String age4 = "4";
-    public static final String age5 = "5";
+    public Dog() {};
 
-    private String size;
+//    public Dog(Size m) {
+//        setType("dog");
+//    }
 
-    public Dog() {
-        setType("dog");
-    }
-
-    public Dog(String size, String age) {
+    public Dog(Size size) {
         this.size = size;
     }
 
-    public Dog(String age) {
+    public Dog(Age age) {
         super(age);
+    }
+
+    public Dog(HealthState healthState) {
+        super(healthState);
     }
 
     @Override
@@ -56,12 +51,33 @@ public class Dog extends Pet{
         return Objects.hash(size);
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
+
+    public enum Size {
+        XS(1),
+        S(2),
+        M(3),
+        L(4),
+        XL(5),
+        UNKNOWN(0)
+        ;
+        private final int value;
+
+        Size (int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+
 
 }

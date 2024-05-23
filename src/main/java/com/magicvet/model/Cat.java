@@ -1,15 +1,18 @@
 package main.java.com.magicvet.model;
 
 public class Cat extends Pet{
-    public static final String age6 = "10";
-    public static final String age7 = "12";
-    public static final String age8 = "6";
-    public static final String age9 = "8";
-    public static final String age10 = "9";
+    private Age age;
     private String size;
+    private HealthState healthState;
 
-    public Cat(String age) {
+    public Cat() {};
+
+    public Cat(Age age) {
         super(age);
+    }
+
+    public Cat(HealthState healthState) {
+        super(healthState);
     }
 
 }
