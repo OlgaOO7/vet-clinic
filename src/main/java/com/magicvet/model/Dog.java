@@ -31,10 +31,12 @@ public class Dog extends Pet{
                 "\n\t\t" +
                 "type = " + getType() +
                 ", sex = " + getSex() +
-                ", age = " + getAge() +
+                ", age = " + getAge().toString() +
                 ", name = " + getName() +
                 ", ownerName = " + getOwnerName() +
                 ", size=" + size +
+                ", healthState = " + getHealthState().toString() +
+                ", registrationDate = " + getRegistrationDate().format(FORMATTER) +
                 "\n\t}";
     }
 
