@@ -42,7 +42,8 @@ public class PetService {
 
         System.out.print("Age: ");
         int age = Integer.parseInt(Main.SCANNER.nextLine());
-        pet.setAge(Pet.Age.valueOf(String.valueOf(age)));
+//        pet.setAge(Pet.Age.valueOf(String.valueOf(age)));
+        pet.setAge(Pet.Age.fromValue(age));
 
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
@@ -57,7 +58,7 @@ public class PetService {
         }
 
         System.out.print("Health state (healthy / recovery / critical / chronic illness / minor illness / serious illness): ");
-        String healthState = Main.SCANNER.nextLine();
+        String healthState = Main.SCANNER.nextLine().toUpperCase().replace(" ", "_");
         pet.setHealthState(Pet.HealthState.valueOf(healthState));
 
         return pet;

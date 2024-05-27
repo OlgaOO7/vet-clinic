@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public abstract class Pet {
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+    protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
 
     private String type;
     private String sex;
@@ -27,10 +27,10 @@ public abstract class Pet {
     public String toString() {
         return "Pet { " + "\n\t\ttype = " + type
                 + ", sex = " + sex
-                + ", age = " + age
+                + ", age = " + age.toString()
                 + ", name = " + name
                 + ", ownerName = " + ownerName
-                + ", healthState = " + healthState
+                + ", healthState = " + healthState.toString()
                 + ", registrationDate = " + registrationDate.format(FORMATTER)
                 + "\n\t}";
     }
@@ -50,7 +50,7 @@ public abstract class Pet {
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, sex, age, name, ownerName, healthState);
+        return Objects.hash(type, sex, age, name, ownerName, healthState, registrationDate);
     }
 
     public String getType() {
@@ -100,6 +100,10 @@ public abstract class Pet {
         return healthState;
     }
 
+    public LocalDateTime getRegistrationDate() {
+        return registrationDate;
+    }
+
     public enum Age {
         AGE1(1),
         AGE2(2),
@@ -124,6 +128,20 @@ public abstract class Pet {
         public int getAgeValue() {
             return ageValue;
         }
+
+        @Override
+        public String toString() {
+            return String.valueOf(ageValue);
+        }
+
+        public static Age fromValue(int value) {
+            for (Age age : values()) {
+                if (age.ageValue == value) {
+                    return age;
+                }
+            }
+            return null;
+        }
     }
 
     public enum HealthState {
@@ -136,6 +154,11 @@ public abstract class Pet {
         ;
 
         private final String healthValue;
+
+        @Override
+        public String toString() {
+            return String.valueOf(healthValue);
+        }
 
         HealthState(String healthValue) {
             this.healthValue = healthValue;
