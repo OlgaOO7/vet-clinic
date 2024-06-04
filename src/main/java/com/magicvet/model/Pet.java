@@ -25,14 +25,14 @@ public abstract class Pet {
 
     @Override
     public String toString() {
-        return "Pet { " + "\n\t\ttype = " + type
+        return "\n\t\tPet { " + "\n\t\t\ttype = " + type
                 + ", sex = " + sex
                 + ", age = " + age.toString()
                 + ", name = " + name
                 + ", ownerName = " + ownerName
                 + ", healthState = " + healthState.toString()
                 + ", registrationDate = " + registrationDate.format(FORMATTER)
-                + "\n\t}";
+                + "\n\t\t}";
     }
 
     @Override
