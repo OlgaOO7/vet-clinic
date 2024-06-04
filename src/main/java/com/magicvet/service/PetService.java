@@ -11,7 +11,7 @@ public class PetService {
     private static final String CAT_TYPE = "cat";
     public boolean petConfirmation;
 
-    public void addPet() {
+    public void askAddPet() {
         petConfirmation = false;
         System.out.print("Do you want to add a pet? (yes / no): ");
         String addingPetConfirmation = Main.SCANNER.nextLine();
