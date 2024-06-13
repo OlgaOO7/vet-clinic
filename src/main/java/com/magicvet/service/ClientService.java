@@ -54,6 +54,10 @@ public class ClientService {
             return null;
         }
 
+        System.out.print("Location: ");
+        String location = Main.SCANNER.nextLine();
+        client.setLocation(Client.Location.valueOf(location));
+
         return client;
     }
 
