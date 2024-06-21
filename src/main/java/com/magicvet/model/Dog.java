@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Dog extends Pet{
 
-    private Age age;
+//    private Age age;
     private Size size;
 
     public Dog() {};
@@ -17,21 +17,26 @@ public class Dog extends Pet{
         this.size = size;
     }
 
-    public Dog(Age age) {
-        super(age);
+//    public Dog(Age age) {
+//        super(age);
+//    }
+public Dog(Sex sex) {
+        super(sex);
     }
 
     public Dog(HealthState healthState) {
         super(healthState);
     }
 
+
     @Override
     public String toString() {
         return "\n\t\tPet { " +
                 "\n\t\t\t" +
                 "type = " + getType() +
-                ", sex = " + getSex() +
-                ", age = " + getAge().toString() +
+                ", sex = " + getSex().toString() +
+//                ", age = " + getAge().toString() +
+                ", age = " + getAge() +
                 ", name = " + getName() +
                 ", ownerName = " + getOwnerName() +
                 ", size=" + getSize() +
@@ -90,7 +95,5 @@ public class Dog extends Pet{
             return value;
         }
     }
-
-
 
 }

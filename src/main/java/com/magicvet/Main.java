@@ -14,7 +14,4 @@ public class Main {
         ApplicationRunner runner = new ApplicationRunner();
         runner.run();
     }
-
-
-
 }
