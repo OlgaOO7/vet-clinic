@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Dog extends Pet{
 
-    private Age age;
+//    private Age age;
     private Size size;
 
     public Dog() {};
@@ -17,24 +17,29 @@ public class Dog extends Pet{
         this.size = size;
     }
 
-    public Dog(Age age) {
-        super(age);
+//    public Dog(Age age) {
+//        super(age);
+//    }
+public Dog(Sex sex) {
+        super(sex);
     }
 
     public Dog(HealthState healthState) {
         super(healthState);
     }
 
+
     @Override
     public String toString() {
         return "\n\t\tPet { " +
                 "\n\t\t\t" +
                 "type = " + getType() +
-                ", sex = " + getSex() +
-                ", age = " + getAge().toString() +
+                ", sex = " + getSex().toString() +
+//                ", age = " + getAge().toString() +
+                ", age = " + getAge() +
                 ", name = " + getName() +
                 ", ownerName = " + getOwnerName() +
-                ", size=" + size +
+                ", size=" + getSize() +
                 ", healthState = " + getHealthState().toString() +
                 ", registrationDate = " + getRegistrationDate().format(FORMATTER) +
                 "\n\t}";
@@ -75,11 +80,20 @@ public class Dog extends Pet{
             this.value = value;
         }
 
+        public static Size fromString(String value) {
+            for(Size size: values()) {
+                if (size.toString().equals(value)) {
+                    return size;
+                }
+            }
+            System.out.println("Unknown to parse value '" + value
+                    + "'. Using default value: " + UNKNOWN);
+            return UNKNOWN;
+        }
+
         public int getValue() {
             return value;
         }
     }
-
-
 
 }

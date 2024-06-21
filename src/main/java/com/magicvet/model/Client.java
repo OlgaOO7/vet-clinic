@@ -26,7 +26,7 @@ public class Client {
                 + ", last name = " + lastName
                 + ", email = " + email
                 + ", registrationDate = " + registrationDate.format(FORMATTER)
-                + "location = " + location
+                + ", location = " + location
                 + "\n\t" + "pets = " + pets
                 + "\n}";
     }
@@ -92,6 +92,6 @@ public class Client {
     }
 
     public enum Location {
-        KYIV, LVIV, ODESA
+        KYIV, LVIV, ODESA, UNKNOWN,
     }
 }

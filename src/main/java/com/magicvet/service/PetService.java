@@ -41,25 +41,46 @@ public class PetService {
         pet.setType(type);
 
         System.out.print("Age: ");
-        int age = Integer.parseInt(Main.SCANNER.nextLine());
+        pet.setAge(Main.SCANNER.nextLine());
+//        int age = Integer.parseInt(Main.SCANNER.nextLine());
 //        pet.setAge(Pet.Age.valueOf(String.valueOf(age)));
-        pet.setAge(Pet.Age.fromValue(age));
+//        pet.setAge(Pet.Age.fromValue(age));
 
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
 
         System.out.print("Sex (male / female): ");
-        pet.setSex(Main.SCANNER.nextLine());
+        Pet.Sex sex;
+        String sexInput = Main.SCANNER.nextLine().toUpperCase().replace(" ", "_");
+        try {
+            sex = Pet.Sex.valueOf(sexInput);
+        } catch (IllegalArgumentException e) {
+            sex = Pet.Sex.UNKNOWN;
+            System.out.println("Unknown to parse value '" + sexInput
+                    + "'. Using default value: " + Pet.Sex.UNKNOWN);
+        }
+        pet.setSex(sex);
+//        pet.setSex(Main.SCANNER.nextLine());
 
         if (type.equals((DOG_TYPE))) {
             System.out.print("Size (XS / S / M / L / XL): ");
             String size = Main.SCANNER.nextLine();
-            ((Dog) pet).setSize(Dog.Size.valueOf(size));
+            ((Dog) pet).setSize(Dog.Size.fromString(size));
         }
 
         System.out.print("Health state (healthy / recovery / critical / chronic illness / minor illness / serious illness): ");
-        String healthState = Main.SCANNER.nextLine().toUpperCase().replace(" ", "_");
-        pet.setHealthState(Pet.HealthState.valueOf(healthState));
+        Pet.HealthState healthState;
+        String healthStateInput = Main.SCANNER.nextLine().toUpperCase().replace(" ", "_");
+
+        try {
+            healthState = Pet.HealthState.valueOf(healthStateInput);
+        } catch (IllegalArgumentException e) {
+            healthState = Pet.HealthState.UNKNOWN;
+            System.out.println("Unknown to parse value '" + healthStateInput
+                    + "'. Using default value: " + Pet.HealthState.UNKNOWN);
+        }
+//        pet.setHealthState(Pet.HealthState.valueOf(healthState));
+        pet.setHealthState(healthState);
 
         return pet;
     }

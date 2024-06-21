@@ -8,8 +8,10 @@ public abstract class Pet {
     protected static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
 
     private String type;
-    private String sex;
-    private Age age;
+//    private String sex;
+    private Sex sex;
+//    private Age age;
+    private String age;
     private String name;
     private String ownerName;
     private HealthState healthState;
@@ -17,17 +19,22 @@ public abstract class Pet {
 
     public Pet() {};
 
-    public Pet(Age age) {
-        this.age = age;
-    }
+//    public Pet(Age age) {
+//        this.age = age;
+//    }
 
+//    public Pet(String age) {
+//        this.age = age;
+//    }
+    public Pet (Sex sex) {this.sex = sex;}
     public Pet (HealthState healthState) {this.healthState = healthState;}
 
     @Override
     public String toString() {
         return "\n\t\tPet { " + "\n\t\t\ttype = " + type
-                + ", sex = " + sex
-                + ", age = " + age.toString()
+                + ", sex = " + sex.toString()
+//                + ", age = " + age.toString()
+                + ", age = " + age
                 + ", name = " + name
                 + ", ownerName = " + ownerName
                 + ", healthState = " + healthState.toString()
@@ -61,22 +68,30 @@ public abstract class Pet {
         this.type = type;
     }
 
-    public String getSex() {
+//    public String getSex() {
+//        return sex;
+//    }
+
+//    public void setSex(String sex) {
+//        this.sex = sex;
+//    }
+public void setSex(Sex sex) {
+    this.sex = sex;
+}
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Age getAge() {
+//    public Age getAge() {
+//        return age;
+//    }
+public String  getAge() {
         return age;
-    }
-
-    public void setAge(Age age) {
-        this.age = age;
-    }
-
+}
+//    public void setAge(Age age) {
+//        this.age = age;
+//    }
+public void setAge (String age) {this.age = age;}
     public String getName() {
         return name;
     }
@@ -104,45 +119,66 @@ public abstract class Pet {
         return registrationDate;
     }
 
-    public enum Age {
-        AGE1(1),
-        AGE2(2),
-        AGE3(3),
-        AGE4(4),
-        AGE5(5),
-        AGE6(6),
-        AGE7(7),
-        AGE8(8),
-        AGE9(9),
-        AGE10(10),
-        AGE11(11),
-        AGE12(12),
+//    public enum Age {
+//        AGE1(1),
+//        AGE2(2),
+//        AGE3(3),
+//        AGE4(4),
+//        AGE5(5),
+//        AGE6(6),
+//        AGE7(7),
+//        AGE8(8),
+//        AGE9(9),
+//        AGE10(10),
+//        AGE11(11),
+//        AGE12(12),
+//        ;
+//
+//        private final int ageValue;
+//
+//        Age(int ageValue) {
+//            this.ageValue = ageValue;
+//        }
+//
+//        public int getAgeValue() {
+//            return ageValue;
+//        }
+
+//        @Override
+//        public String toString() {
+//            return String.valueOf(ageValue);
+//        }
+//
+//        public static Age fromValue(int value) {
+//            for (Age age : values()) {
+//                if (age.ageValue == value) {
+//                    return age;
+//                }
+//            }
+//            return null;
+//        }
+//    }
+
+    public enum Sex {
+        MALE("male"),
+        FEMALE("female"),
+        UNKNOWN("unknown"),
         ;
 
-        private final int ageValue;
-
-        Age(int ageValue) {
-            this.ageValue = ageValue;
-        }
-
-        public int getAgeValue() {
-            return ageValue;
-        }
+        private final String sexValue;
 
         @Override
         public String toString() {
-            return String.valueOf(ageValue);
+            return String.valueOf(sexValue);
         }
 
-        public static Age fromValue(int value) {
-            for (Age age : values()) {
-                if (age.ageValue == value) {
-                    return age;
-                }
-            }
-            return null;
-        }
+        Sex(String sexValue) {this.sexValue = sexValue;}
+
+        public String getSexValue() {return sexValue;}
     }
+
+
+
 
     public enum HealthState {
         HEALTHY("healthy"),
@@ -150,7 +186,8 @@ public abstract class Pet {
         CRITICAL("critical"),
         CHRONIC_ILLNESS("chronic illness"),
         MINOR_ILLNESS("minor illness"),
-        SERIOUS_ILLNESS("serious illness")
+        SERIOUS_ILLNESS("serious illness"),
+        UNKNOWN("unknown"),
         ;
 
         private final String healthValue;
