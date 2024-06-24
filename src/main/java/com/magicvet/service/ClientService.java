@@ -3,6 +3,8 @@ package main.java.com.magicvet.service;
 import main.java.com.magicvet.Main;
 import main.java.com.magicvet.model.Client;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,7 +12,7 @@ public class ClientService {
     private static final String EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     private static final String NAME_PATTERN = "^[a-zA-Z]{3,}(-[a-zA-Z]{3,})*$";
 
-    public Client registerNewClient() {
+    public Optional<Client> registerNewClient() {
         Client client = null;
 
         System.out.println("Please provide a client details.");
@@ -27,7 +29,7 @@ public class ClientService {
         } else {
             System.out.println("Provided email is invalid.");
         }
-        return client;
+        return Optional.ofNullable(client);
     }
 
     private static Client buildClient(String email) {
@@ -66,7 +68,6 @@ public class ClientService {
         }
 
         client.setLocation(location);
-
 
         return client;
     }

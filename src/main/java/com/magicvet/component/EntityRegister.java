@@ -6,22 +6,17 @@ import main.java.com.magicvet.service.ClientService;
 import main.java.com.magicvet.service.PetService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class EntityRegister {
     private final ClientService clientService = new ClientService();
     private final PetService petService = new PetService();
-    private Client addClient() {
-        Client client = clientService.registerNewClient();
-
-        if (client != null) {
-            petService.askAddPet();
-            registerPets(client);
-        }
-        System.out.println(client);
-
+    private Optional<Client> addClient() {
+        Optional<Client> client = clientService.registerNewClient();
+        client.ifPresent(this::registerPets);
         return client;
     }
     public void registerClients() {
@@ -29,70 +24,38 @@ public class EntityRegister {
         List<Client> clients = new ArrayList<>();
         String message = "Do you want to register more clients? (yes/no): ";
         do {
-            Client client = addClient();
-            if(client != null) {
-                clients.add(client);
-            }
-
-//            System.out.print("Do you want to register more clients? (yes/no): ");
-//            String answer = Main.SCANNER.nextLine();
-//
-//            if ("no".equals(answer)) {
-//                continueAddClients = false;
-//            }
+            Optional<Client> client = addClient();
+            client.ifPresent(clients::add);
         } while (verifyRepeating(message));
 
-        Map<Client.Location, List<Client>> clientsByLocation = groupClients(clients);
+        Map<Client.Location, List<Client>> clientsByLocation = clients.stream()
+                .collect(Collectors.groupingBy(Client::getLocation));
         printClients(clientsByLocation);
     }
 
     private void printClients(Map<Client.Location, List<Client>> clientsByLocation) {
-        for(Map.Entry<Client.Location, List<Client>> clients : clientsByLocation.entrySet()) {
-            String content = "\nLocation: " + clients.getKey()
-                    + "\nClients (" + clients.getValue().size() + "):"
-                    + "\n\t" + clients.getValue();
+//        for(Map.Entry<Client.Location, List<Client>> clients : clientsByLocation.entrySet()) {
+//            String content = "\nLocation: " + clients.getKey()
+//                    + "\nClients (" + clients.getValue().size() + "):"
+//                    + "\n\t" + clients.getValue();
+        clientsByLocation.forEach((location, clients) -> {
+            String content = "\nLocation: " + location
+                    + "\nClients (" + clients.size() + "):"
+                    + "\n\t" + clients;
 
             System.out.println(content);
-        }
-    }
-
-    private Map<Client.Location,List<Client>> groupClients(List<Client> clients) {
-        List<Client> fromKyiv = new ArrayList<>();
-        List<Client> fromLviv = new ArrayList<>();
-        List<Client> fromOdesa = new ArrayList<>();
-        List<Client> unknownLocation = new ArrayList<>();
-
-        for(Client client : clients) {
-            switch (client.getLocation()) {
-                case KYIV -> fromKyiv.add(client);
-                case LVIV -> fromLviv.add(client);
-                case ODESA -> fromOdesa.add(client);
-                case UNKNOWN -> unknownLocation.add(client);
-            }
-        }
-
-        Map<Client.Location, List<Client>> clientsByLocation = new HashMap<>();
-        clientsByLocation.put(Client.Location.KYIV, fromKyiv);
-        clientsByLocation.put(Client.Location.LVIV, fromLviv);
-        clientsByLocation.put(Client.Location.ODESA, fromOdesa);
-        clientsByLocation.put(Client.Location.UNKNOWN, unknownLocation);
-
-        return clientsByLocation;
+        });
     }
 
     private void registerPets(Client client) {
-//        boolean continueAddPets = true;
         String message = "Do you want to add more pets for the current client? (yes/no): ";
+
+        petService.askAddPet();
 
         if (petService.petConfirmation) {
             do {
                 addPet(client);
-//                System.out.print("Do you want to add more pets for the current client? (yes/no): ");
-//                String answer = Main.SCANNER.nextLine();
-//
-//                if ("no".equals(answer)) {
-//                    continueAddPets = false;
-//                }
+                System.out.println(client);
             } while (verifyRepeating(message));
         } else {
             System.out.println("Pet has not been added.");
@@ -101,13 +64,16 @@ public class EntityRegister {
 
     private void addPet(Client client) {
         System.out.println("Adding a pet.");
-        Pet pet = petService.registerNewPet();
+        Optional<Pet> pet = petService.registerNewPet();
+        pet.ifPresent(p -> {client.addPet(p);
+        p.setOwnerName(client.getFirstName() + " " + client.getLastName());
+        System.out.println("Pet has been added.");});
 
-        if (pet != null) {
-            client.addPet(pet);
-            pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
-            System.out.println("Pet has been added.");
-        }
+//        if (pet != null) {
+//            client.addPet(pet);
+//            pet.setOwnerName(client.getFirstName() + " " + client.getLastName());
+//            System.out.println("Pet has been added.");
+//        }
     }
 
     private boolean verifyRepeating(String message) {
