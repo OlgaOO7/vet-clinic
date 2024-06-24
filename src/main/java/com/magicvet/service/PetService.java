@@ -5,6 +5,8 @@ import main.java.com.magicvet.model.Cat;
 import main.java.com.magicvet.model.Pet;
 import main.java.com.magicvet.model.Dog;
 
+import java.util.Optional;
+
 public class PetService {
 
     private static final String DOG_TYPE = "dog";
@@ -21,7 +23,7 @@ public class PetService {
         }
     }
 
-    public Pet registerNewPet() {
+    public Optional<Pet> registerNewPet() {
         Pet pet = null;
 
         System.out.print("Type (dog / cat): ");
@@ -33,7 +35,7 @@ public class PetService {
             System.out.println("Unknown pet type: " + type);
         }
 
-        return pet;
+        return Optional.ofNullable(pet);
     }
 
     private Pet buildPet(String type) {
@@ -42,9 +44,6 @@ public class PetService {
 
         System.out.print("Age: ");
         pet.setAge(Main.SCANNER.nextLine());
-//        int age = Integer.parseInt(Main.SCANNER.nextLine());
-//        pet.setAge(Pet.Age.valueOf(String.valueOf(age)));
-//        pet.setAge(Pet.Age.fromValue(age));
 
         System.out.print("Name: ");
         pet.setName(Main.SCANNER.nextLine());
@@ -60,7 +59,6 @@ public class PetService {
                     + "'. Using default value: " + Pet.Sex.UNKNOWN);
         }
         pet.setSex(sex);
-//        pet.setSex(Main.SCANNER.nextLine());
 
         if (type.equals((DOG_TYPE))) {
             System.out.print("Size (XS / S / M / L / XL): ");
@@ -79,12 +77,7 @@ public class PetService {
             System.out.println("Unknown to parse value '" + healthStateInput
                     + "'. Using default value: " + Pet.HealthState.UNKNOWN);
         }
-//        pet.setHealthState(Pet.HealthState.valueOf(healthState));
         pet.setHealthState(healthState);
-
         return pet;
     }
-
-
-
 }

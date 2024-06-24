@@ -19,13 +19,6 @@ public abstract class Pet {
 
     public Pet() {};
 
-//    public Pet(Age age) {
-//        this.age = age;
-//    }
-
-//    public Pet(String age) {
-//        this.age = age;
-//    }
     public Pet (Sex sex) {this.sex = sex;}
     public Pet (HealthState healthState) {this.healthState = healthState;}
 
@@ -33,7 +26,6 @@ public abstract class Pet {
     public String toString() {
         return "\n\t\tPet { " + "\n\t\t\ttype = " + type
                 + ", sex = " + sex.toString()
-//                + ", age = " + age.toString()
                 + ", age = " + age
                 + ", name = " + name
                 + ", ownerName = " + ownerName
@@ -68,13 +60,6 @@ public abstract class Pet {
         this.type = type;
     }
 
-//    public String getSex() {
-//        return sex;
-//    }
-
-//    public void setSex(String sex) {
-//        this.sex = sex;
-//    }
 public void setSex(Sex sex) {
     this.sex = sex;
 }
@@ -82,15 +67,10 @@ public void setSex(Sex sex) {
         return sex;
     }
 
-//    public Age getAge() {
-//        return age;
-//    }
 public String  getAge() {
         return age;
 }
-//    public void setAge(Age age) {
-//        this.age = age;
-//    }
+
 public void setAge (String age) {this.age = age;}
     public String getName() {
         return name;
@@ -119,46 +99,6 @@ public void setAge (String age) {this.age = age;}
         return registrationDate;
     }
 
-//    public enum Age {
-//        AGE1(1),
-//        AGE2(2),
-//        AGE3(3),
-//        AGE4(4),
-//        AGE5(5),
-//        AGE6(6),
-//        AGE7(7),
-//        AGE8(8),
-//        AGE9(9),
-//        AGE10(10),
-//        AGE11(11),
-//        AGE12(12),
-//        ;
-//
-//        private final int ageValue;
-//
-//        Age(int ageValue) {
-//            this.ageValue = ageValue;
-//        }
-//
-//        public int getAgeValue() {
-//            return ageValue;
-//        }
-
-//        @Override
-//        public String toString() {
-//            return String.valueOf(ageValue);
-//        }
-//
-//        public static Age fromValue(int value) {
-//            for (Age age : values()) {
-//                if (age.ageValue == value) {
-//                    return age;
-//                }
-//            }
-//            return null;
-//        }
-//    }
-
     public enum Sex {
         MALE("male"),
         FEMALE("female"),
@@ -176,9 +116,6 @@ public void setAge (String age) {this.age = age;}
 
         public String getSexValue() {return sexValue;}
     }
-
-
-
 
     public enum HealthState {
         HEALTHY("healthy"),

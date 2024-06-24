@@ -4,22 +4,14 @@ import java.util.Objects;
 
 public class Dog extends Pet{
 
-//    private Age age;
     private Size size;
 
     public Dog() {};
-
-//    public Dog(Size m) {
-//        setType("dog");
-//    }
 
     public Dog(Size size) {
         this.size = size;
     }
 
-//    public Dog(Age age) {
-//        super(age);
-//    }
 public Dog(Sex sex) {
         super(sex);
     }
@@ -35,7 +27,6 @@ public Dog(Sex sex) {
                 "\n\t\t\t" +
                 "type = " + getType() +
                 ", sex = " + getSex().toString() +
-//                ", age = " + getAge().toString() +
                 ", age = " + getAge() +
                 ", name = " + getName() +
                 ", ownerName = " + getOwnerName() +
